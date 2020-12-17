@@ -1,0 +1,47 @@
+<mat-card class="fit-card">
+	<mat-card-header>
+		<mat-card-title>Clusters</mat-card-title>
+		<mat-card-subtitle>BIC: {{ data.output.bic }}</mat-card-subtitle>
+	</mat-card-header>
+	<!-- <mat-card-content *ngIf="networks.length"> -->
+		<mat-tab-group dynamicHeight animationDuration="0ms">
+			<mat-tab *ngFor="let network of networks; let i = index" label="Cluster {{i}}">
+				<ng-template matTabContent>
+					<p class="alpha">
+						Alpha: {{ network.alpha }}
+					</p>
+					<app-network [data]="network" [id]="i"></app-network>
+				</ng-template>
+			</mat-tab>
+		</mat-tab-group>
+	<!-- </mat-card-content> -->
+	<mat-card-content *ngIf="!networks.length">
+		<div><mat-spinner color="accent" style="margin: 0 auto;"></mat-spinner></div>
+	</mat-card-content>
+		<mat-card-actions align="end" style="padding-bottom: 0; margin-bottom: 0;">
+			<button mat-button color="primary" *ngIf="data['files'] && data['files']['clusters.csv']" (click)="downloadClusters()">Download Clusters as CSV</button>
+		</mat-card-actions>
+		<mat-card-actions align="end">
+			<button mat-button color="primary" *ngIf="data['files'] && data['files']['dbn.txt']" (click)="downloadText()">Download Networks as Text</button>
+		</mat-card-actions>
+</mat-card>
+
+<mat-card class="fit-card" style="padding:0;">
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Logs
+				</mat-panel-title>
+				<mat-panel-description>
+					See the program's output logs
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngIf="data.output.logs">
+				<div *ngFor="let log of data.output.logs">
+					{{ log }}
+				</div>
+			</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>

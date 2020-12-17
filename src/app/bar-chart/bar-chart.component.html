@@ -1,0 +1,46 @@
+<mat-toolbar-row>
+    <span class="spacer"></span>
+    <div class="mat-paginator">
+        <div class="mat-paginator-outer-container">
+            <div class="mat-paginator-container">
+				<div class="mat-paginator-page-size">
+                    <div class="mat-paginator-page-size-label">Attribute:</div>
+                    <mat-form-field
+                        class="mat-paginator-page-size-select">
+                        <mat-select
+                            [value]="selectedAttribute"
+                            (selectionChange)="onChangeAttribute($event.value)">
+                            <mat-option *ngFor="let attribute of attributes" [value]="attribute">
+                                {{attribute}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="mat-paginator-page-size">
+                    <div class="mat-paginator-page-size-label">Id:</div>
+                    <mat-form-field
+                        class="mat-paginator-page-size-select">
+                        <mat-select
+                            [value]="selectedId"
+                            (selectionChange)="onChangeId($event.value)">
+                            <mat-option *ngFor="let id of ids" [value]="id">
+                                {{id}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- <mat-paginator
+		>
+	</mat-paginator> -->
+	<button
+        (click)="download()"
+		matTooltip="Download as PNG"
+		matTooltipPosition="above"
+		mat-icon-button>
+		<mat-icon>save_alt</mat-icon>
+	</button>
+</mat-toolbar-row>
+<div #barchart id="barchart" (window:resize)="onResize()"></div>

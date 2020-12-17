@@ -1,0 +1,21 @@
+<h3>Your results</h3>
+<div class="center" *ngIf="!results" ><mat-spinner color="accent"></mat-spinner></div>
+<div layout="horizontal">
+	<div class="fit-card" *ngFor="let result of results">
+<!-- TODO: remove stroke when clicking -->
+		<mat-card routerLink="/results/{{result.requestId}}" matRipple class="clickable">
+			{{result.requestName ? result.requestName : result.requestId}}
+<!-- TODO: align button to right when compressed -->
+<!-- TODO: ellipsis when compressed -->
+			<button
+				type="button"
+				aria-label="Delete result"
+				mat-icon-button
+				style="margin-left: 5px;"
+				color="accent"
+				(click)="$event.stopPropagation(); delete(result);">
+				<mat-icon aria-label="Side nav toggle icon">delete</mat-icon>
+			</button>
+		</mat-card>
+	</div>
+</div>

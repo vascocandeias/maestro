@@ -1,0 +1,49 @@
+<mat-card class="fit-card" style="padding:0;">
+	<mat-accordion>
+		<mat-expansion-panel id="panel"
+			(afterExpand)="open()"
+			(closed)="close()">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Network
+				</mat-panel-title>
+				<mat-panel-description>
+					DBN used to impute values
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngIf="network">
+				<app-network [data]="network" [id]=""></app-network>
+			</div>
+			<mat-card-actions align="end" style="margin: 0px -16px -16px 0px">
+				<button mat-button color="primary" (click)="downloadText()">Download Network as Text</button>
+			</mat-card-actions>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>
+
+<mat-card class="fit-card" style="padding:0;">
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Logs
+				</mat-panel-title>
+				<mat-panel-description>
+					See the program's output logs
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngIf="data.output.logs">
+				<div *ngFor="let log of data.output.logs">
+					{{ log }}
+				</div>
+			</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>
+
+
+<div style="clear: both;" *ngIf="file.dataset">
+	<app-time-series #chart [file]="file"></app-time-series>
+</div>
+
+

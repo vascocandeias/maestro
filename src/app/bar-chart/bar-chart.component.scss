@@ -1,0 +1,34 @@
+@import '/src/variables.scss';
+
+text{
+  font: 13px Roboto, "Helvetica Neue", sans-serif;
+  fill: black;
+  pointer-events: none;
+}
+
+rect {
+    fill: mat-color($app-accent);
+}
+
+.mat-paginator-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  flex-wrap: wrap-reverse;
+  // width: 100%;
+}
+
+.mat-paginator-page-size {
+    display: flex;
+    align-items: baseline;
+    margin-right: 8px;
+}
+
+.mat-paginator-page-size-label {
+    margin: 0 4px;
+}
+
+.mat-paginator-outer-container {
+    display: flex;
+}

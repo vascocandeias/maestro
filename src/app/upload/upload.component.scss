@@ -1,0 +1,53 @@
+@import '/src/variables.scss';
+
+.error {
+  @extend .dropdiv;
+  background-color: red;
+}
+
+.upload-center {
+  min-height: calc(100vh - 104px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdiv {
+  // @extend .center;
+  min-width: min(500px, 35vw);
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+   
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  border-radius: 4px;
+  .body {
+    text-align: center;
+
+    &.hidden {
+      display: none;
+    }
+    input {
+      visibility: hidden;
+    }
+    .icon {
+      font-size: 120px;
+      height: 80px;
+    }
+    p {
+      margin-bottom: 0;
+      line-height: 1.6;
+      b, a {
+        color: mat-color($app-accent);;
+      }
+    }
+  }
+  &.active {
+    border: dashed 2px mat-color($app-accent);
+    .body{
+        pointer-events: none !important;
+    }
+  }
+}

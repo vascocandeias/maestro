@@ -1,0 +1,203 @@
+<div style="margin:-20px">
+
+    <div class="header">
+        <div class="header-content">
+            <div class="text">
+                <h1>MAESTRO</h1>
+                <h3>Dynamic Bayesian Networks Tools</h3>
+                <p>Multivariate time series analysis brought online.</p>
+            </div>
+            <mat-card class="logos">
+                <mat-card-content>
+                        <img mat-card-image src="assets/images/ist.png" alt="IST">
+                        <img mat-card-image src="assets/images/inesc.png" alt="INESC-ID">
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <section>
+        <div class="content">
+            <h2>What can I do in this website?</h2>
+            <p>
+                The purpose of this tool is to analise multivariate time series using Dynamic Bayesian Networks online.
+                It consists in the aggregation of multiple tools that were so far only available as offline command-line programs,
+                which (let's be honest) you would otherwise probably not try.
+            </p>
+            <p>
+                Want to learn more about the available tools? Read more below.
+            </p>
+            <br>
+            <carousel
+                [loop]="true"
+                [autoplay]="true"
+                [arrowsOutside]="true"
+                [margin]="20"
+                [cellWidth]="width"
+                [height]="width == 260 ? 210 : 210 - width*0.90 + 260"
+                [overflowCellsLimit]="2">
+                <div class="carousel-cell" *ngFor="let method of methods" >
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-icon mat-card-avatar>{{ method.icon }}</mat-icon>
+                            <mat-card-title style="line-height: 1em">{{ method.name }}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content style="color: #616161;">{{ method.description }}</mat-card-content>
+                        <mat-card-actions *ngIf="method.link" align="end">
+                            <a mat-button target="_blank" [href]="method.link">Learn more</a>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </carousel>
+        </div>
+    </section>
+
+    <!-- TODO: But what are multivariate time series? Have you ever tried to estimate a bla bla bla? That's what multivariate are for... -->
+
+    <section class="light-section">
+        <div class="content">
+            <h2>Perfect! Now, how do I use it?</h2>
+            <mat-vertical-stepper #vstepper *ngIf="isSmall$ | async">
+                <mat-step label="Register" state="how_to_reg" [completed]="vstepper.selectedIndex === 0">
+                    <ng-container *ngTemplateOutlet="Content0"></ng-container>
+                </mat-step>
+                <mat-step label="Upload" state="file_upload" [completed]="vstepper.selectedIndex === 1">
+                    <ng-container *ngTemplateOutlet="Content1"></ng-container>
+                </mat-step>
+                <mat-step label="Analise" state="bar_chart" [completed]="vstepper.selectedIndex === 2">
+                    <ng-container *ngTemplateOutlet="Content2"></ng-container>
+                </mat-step>
+                <mat-step label="Receive" state="mail_outline" [completed]="vstepper.selectedIndex === 3">
+                    <ng-container *ngTemplateOutlet="Content3"></ng-container>
+                </mat-step>
+                <mat-step label="Download" state="file_download" [completed]="vstepper.selectedIndex === 4">
+                    <ng-container *ngTemplateOutlet="Content4"></ng-container>
+                </mat-step>
+            </mat-vertical-stepper>
+            <mat-horizontal-stepper #hstepper *ngIf="(isSmall$ | async) == false">
+                <mat-step label="Register" state="how_to_reg" [completed]="hstepper.selectedIndex === 0">
+                    <ng-container *ngTemplateOutlet="Content0"></ng-container>
+                </mat-step>
+                <mat-step label="Upload" state="file_upload" [completed]="hstepper.selectedIndex === 1">
+                    <ng-container *ngTemplateOutlet="Content1"></ng-container>
+                </mat-step>
+                <mat-step label="Analise" state="bar_chart" [completed]="hstepper.selectedIndex === 2">
+                    <ng-container *ngTemplateOutlet="Content2"></ng-container>
+                </mat-step>
+                <mat-step label="Receive" state="mail_outline" [completed]="hstepper.selectedIndex === 3">
+                    <ng-container *ngTemplateOutlet="Content3"></ng-container>
+                </mat-step>
+                <mat-step label="Download" state="file_download" [completed]="hstepper.selectedIndex === 4">
+                    <ng-container *ngTemplateOutlet="Content4"></ng-container>
+                </mat-step>
+            </mat-horizontal-stepper>
+            <ng-template #Content0>
+                <p>Tell us who you are by registering an email so that we know how to contact you.</p>
+            </ng-template>
+            <ng-template #Content1>
+                <p>Before analysing anything we need the data set, so upload a multivariate time series CSV file to get started.</p>
+            </ng-template>
+            <ng-template #Content2>
+                <p>You can now use as many tools as you want to analyze your data. Enjoy yourself!</p>
+            </ng-template>
+            <ng-template #Content3>
+                <p>Sometimes you need to give the tools time to do their job. But not to worry: if it takes too long, we will send you an email.</p>
+            </ng-template>
+            <ng-template #Content4>
+                <p>We have no use for your results. So when you are done, just download them and be on your way!</p>
+            </ng-template>
+        </div>
+    </section>
+
+    <section>
+        <div class="content">
+            <h2>But why do I need an account?</h2>
+            <p>
+                <!-- TODO: Arranjar melhor forma -->
+                Sometimes things take longer than we would like. In this tool, that would be the data analysis.
+                And when that happens, we do not want you to keep a tab open, waiting to get the result.
+                Imagine the caos when analyzing many data sets at the same time and all of them taking longer than one hour!
+                This way, you can go on with your life and be notified when you get your results.
+                Moreover, you will be able to come back later and access this results, until either you remove them or they are automatically deleted.
+            </p>
+            <p>
+                That's not reason enough for you? Would privacy be one?
+            </p>
+            <p>
+                We could still give you the result's link in advance and let you come back later and verify if it was ready, sure.
+                But that would mean that anyone with that link could also check your result, as there would be no possible authentication.
+                Anyone could guess the URL and just use your analysis.  the same would happen with the data sets!
+                By signing up, you can forget about those concerns and you will have control over everything you own.
+                Plus, when you are done, deleting the account is even simpler than signing up!
+            </p>
+        </div>
+    </section>
+
+    <section class="light-section">
+        <div class="content">
+            <h2>Ok... So is my data safe?</h2>
+            <!-- TODO: If you forget to delete something? After X days, files are deleted (incluir quando fizer) -->
+            <!-- Explicar como é feita a encriptação e novas medidas -->
+            <p>
+                <!-- TODO: change to more formal/direct: Yes! -->
+                Of course it is. The only thing we ask from you is a verified email, 
+                so that we can not only guarantee your legitimacy but also let you know whenever you have results waiting for you.
+            </p>
+            <p>
+                As for the time series data and results, it is safely stored in Amazon S3 and DynamoDB with AES-256 encryption at rest, secured from prying eyes.
+                And everything you have in the servers is transparently shown in your dashboard, so that you can delete anything, even your entire account, at any time.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content">
+            <h2>What if I just want to see what you are capable of?</h2>
+            <p>
+                No worries: we have some sample example data sets that can be used rapidly. 
+                You still need an account, but you can delete it as soon as you are finished. No strings attached.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="content">
+            <div class="col">
+                <h2>Still have any question? Contact me!</h2>
+                <p>
+                    If you still have any doubts or simply want to learn more about this project,
+                    do not hesitate to contact me at <a class="mail" href="mailto: vascocandeias@tecnico.ulisboa.pt">vascocandeias@tecnico.ulisboa.pt</a>.
+                </p>
+            </div>
+            <div class="col">
+                <h2>Links</h2>
+                <div class="spaced">
+                    <a mat-flat-button class="social" color="linkedin" target="_blank" href="https://www.linkedin.com/in/vasco-candeias">
+                        <fa-icon [icon]="faLinkedin"></fa-icon>
+                        View profile
+                    </a>
+                    <a mat-flat-button class="social" color="github" target="_blank" href="https://github.com/vascocandeias">
+                        <fa-icon [icon]="faGithub"></fa-icon>
+                        View profile
+                    </a>
+                    <a mat-flat-button class="social" color="github" target="_blank" href="https://github.com/vascocandeias/maestro">
+                        <fa-icon [icon]="faGithub"></fa-icon>
+                        View front-end repo
+                    </a>
+                    <span class="spacer"></span>
+                    <a mat-flat-button class="social" color="github" target="_blank" href="https://github.com/vascocandeias/maestro-backend">
+                        <fa-icon [icon]="faGithub"></fa-icon>
+                        View back-end repo
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="content">
+                <p ngPreserveWhitespaces>
+                    © 2020 by Vasco Candeias. Code licensed under an <a class="custom-link" target="_blank" href="/assets/LICENSE">MIT License</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>

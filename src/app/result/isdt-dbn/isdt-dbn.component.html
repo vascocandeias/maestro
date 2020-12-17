@@ -1,0 +1,22 @@
+<!-- <p style="margin-bottom: 2rem;white-space:pre-wrap;">{{ toPrint }}</p> -->
+<mat-card class="fit-card" *ngIf="type == 'table'">
+	<table>
+		<tr>
+			<th *ngFor="let h of header">{{h}}</th>
+		</tr>
+		<tr *ngFor="let row of rows">
+			<td *ngFor="let cell of row">
+				{{cell}}
+			</td>
+		</tr>
+	</table>
+	<mat-card-actions align="end">
+		<button mat-button color="primary" (click)="download()">Download Data</button>
+	</mat-card-actions>
+</mat-card>
+<mat-card class="full-card" style="overflow:hidden" *ngIf="type == 'histogram'">
+	<app-bar-chart [data]="chartData"></app-bar-chart>
+	<mat-card-actions align="end">
+		<button mat-button color="primary" (click)="download()">Download Data</button>
+	</mat-card-actions>
+</mat-card>

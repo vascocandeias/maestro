@@ -1,0 +1,14 @@
+::ng-deep .mat-dialog-container {
+    width: fit-content;
+    margin: auto;
+    padding: 40px;
+}
+
+.loader > * {
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto;
+}
+.loader p {
+    margin-top: 1em;
+}

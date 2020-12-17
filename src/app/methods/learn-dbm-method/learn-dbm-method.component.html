@@ -1,0 +1,94 @@
+<mat-card class="fit-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="accent">bubble_chart</mat-icon>
+        <mat-card-title>Clustering</mat-card-title>
+        <mat-card-subtitle>Find clusters of subjects using DBN models</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="request()">
+        <mat-card-content>
+            <br>
+            <mat-form-field>
+                <mat-label>
+                    DBN structure
+                </mat-label>
+                <mat-select formControlName="type" required>
+                    <mat-option value="tDBN">tDBN</mat-option>
+                    <mat-option value="bcDBN">bcDBN</mat-option>
+                    <mat-option value="cDBN">cDBN</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="-ns"
+                attr.id="booleanOption">
+                Learn stationary network
+            </mat-checkbox>
+            <br><br>
+            <mat-checkbox 
+                formControlName="-sp"
+                attr.id="booleanOption">
+                Force intra-slice connectivity to be a tree
+            </mat-checkbox>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Intra-slice in-degree</mat-label>
+                <input matInput
+                    placeholder="Enter a non-negative number"
+                    type="number"
+                    min="0"
+                    max="9999"
+                    formControlName="-ind" required>
+                <mat-hint>In-degree of the intra-slice network</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Markov lag</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-m" required>
+                <mat-hint>Maximum markov lag</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Number of clusters</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-k" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Number of parents</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-p" required>
+                <mat-hint>Maximum number of parents from preceding time-slice(s)</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Result name</mat-label>
+                <input matInput
+                    placeholder="Enter name for your result"
+                    type="text"
+                    formControlName="requestName" required>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="notification"
+                attr.id="booleanOption">
+                Email results that take longer than 30 seconds
+            </mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-bottom: -16px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Determine Clusters</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

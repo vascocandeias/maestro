@@ -1,0 +1,22 @@
+<h3>Your networks</h3>
+<div class="center" *ngIf="!networks" ><mat-spinner color="accent"></mat-spinner></div>
+<div layout="horizontal">
+	<div class="fit-card" *ngFor="let network of networks">
+		<!-- <mat-card (click)="onCardClick()" matRipple class="clickable"> -->
+<!-- TODO: remove stroke when clicking -->
+		<mat-card routerLink="/networks/{{network.requestId}}" matRipple class="clickable">
+			{{network.datasetName ? network.datasetName.split('.ser')[0] : network.requestId}}
+<!-- TODO: align button to right when compressed -->
+<!-- TODO: ellipsis when compressed -->
+			<button
+				type="button"
+				aria-label="Delete network"
+				mat-icon-button
+				style="margin-left: 5px;"
+				color="accent"
+				(click)="$event.stopPropagation(); delete(network);">
+				<mat-icon aria-label="Side nav toggle icon">delete</mat-icon>
+			</button>
+		</mat-card>
+	</div>
+</div>

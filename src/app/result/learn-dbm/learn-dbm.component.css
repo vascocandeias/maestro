@@ -1,0 +1,14 @@
+.alpha {
+    margin-bottom: -10px;
+    padding-left: 16px;
+    font-size: 16px;
+}
+
+/* mat-tab-group,
+mat-tab,
+::ng-deep .mat-tab-body-wrapper,
+::ng-deep .mat-tab-group.mat-tab-group-dynamic-height ::ng-deep .mat-tab-body.mat-tab-body-active,
+::ng-deep .mat-tab-body.mat-tab-body-active,
+::ng-deep .mat-tab-body {
+    overflow: inherit !important;
+} */

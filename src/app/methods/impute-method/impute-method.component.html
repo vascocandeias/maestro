@@ -1,0 +1,124 @@
+<mat-card class="fit-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="accent">add_circle_outline</mat-icon>
+        <mat-card-title>Imputation</mat-card-title>
+        <mat-card-subtitle>Fill missing data</mat-card-subtitle>
+    </mat-card-header>
+
+    <form [formGroup]="forms.controls[selectedTabIndex]" autocomplete="off" novalidate (ngSubmit)="request()">
+        <mat-card-content>
+            <mat-tab-group dynamicHeight [(selectedIndex)]="selectedTabIndex">
+                <mat-tab label="DBN" *ngIf="isBoolean(discrete)">
+                    <ng-template matTabContent>
+                        <br>
+                        <mat-form-field>
+                            <mat-label>
+                                DBN structure
+                            </mat-label>
+                            <mat-select formControlName="type" required>
+                                <mat-option value="tDBN">tDBN</mat-option>
+                                <mat-option value="bcDBN">bcDBN</mat-option>
+                                <mat-option value="cDBN">cDBN</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-checkbox 
+                            formControlName="-ns"
+                            attr.id="booleanOption">
+                            Learn stationary network
+                        </mat-checkbox>
+                        <br><br>
+                        <mat-checkbox 
+                            formControlName="-sp"
+                            attr.id="booleanOption">
+                            Force intra-slice connectivity to be a tree
+                        </mat-checkbox>
+                        <br><br>
+                        <mat-form-field>
+                            <mat-label>Intra-slice in-degree</mat-label>
+                            <input matInput
+                                placeholder="Enter a non-negative number"
+                                type="number"
+                                min="1"
+                                max="9999"
+                                formControlName="-ind" required>
+                            <mat-hint>In-degree of the intra-slice network</mat-hint>
+                        </mat-form-field>
+                        <br><br>
+                        <mat-form-field>
+                            <mat-label>Markov lag</mat-label>
+                            <input matInput
+                                placeholder="Enter a positive number"
+                                type="number"
+                                min="1"
+                                max="9999"
+                                formControlName="-m" required>
+                            <mat-hint>Maximum markov lag</mat-hint>
+                        </mat-form-field>
+                        <br><br>
+                        <mat-form-field>
+                            <mat-label>Number of parents</mat-label>
+                            <input matInput
+                                placeholder="Enter a positive number"
+                                type="number"
+                                min="1"
+                                max="9999"
+                                formControlName="-p" required>
+                            <mat-hint>Maximum number of parents from preceding time&#8209;slice(s)</mat-hint>
+                        </mat-form-field>
+                        <br><br>
+                        <mat-form-field>
+                            <mat-label>Result name</mat-label>
+                            <input matInput
+                                placeholder="Enter name for your result"
+                                type="text"
+                                formControlName="requestName" required>
+                        </mat-form-field>
+                        <br>
+                        <mat-checkbox 
+                            formControlName="notification"
+                            attr.id="booleanOption">
+                            Email results that take longer than 30 seconds
+                        </mat-checkbox>
+                    </ng-template>
+                </mat-tab>
+                <mat-tab label="Simple">
+                    <ng-template matTabContent>
+                        <br>
+                        <mat-form-field>
+                            <mat-label>
+                                Method
+                            </mat-label>
+                            <mat-select formControlName="method" required>
+                                <mat-option value="locf">Last observation carried forward</mat-option>
+                                <mat-option value="lr" *ngIf="!isBoolean(discrete) && discrete.length == 0">Linear regression</mat-option>
+                            </mat-select>
+                            <mat-hint>Method to be used for imputation</mat-hint>
+                        </mat-form-field>
+                        <br><br>
+                        <mat-form-field>
+                            <mat-label>Result name</mat-label>
+                            <input matInput
+                                placeholder="Enter name for your result"
+                                type="text"
+                                formControlName="requestName" required>
+                        </mat-form-field>
+                        <br>
+                        <mat-checkbox 
+                            formControlName="notification"
+                            attr.id="booleanOption">
+                            Email results that take longer than 30 seconds
+                        </mat-checkbox>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-bottom: -16px;">
+            <button mat-raised-button
+                color="primary"
+                [disabled]="forms.controls[selectedTabIndex].invalid">
+                Impute
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>

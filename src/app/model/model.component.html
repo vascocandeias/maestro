@@ -1,0 +1,177 @@
+<mat-card class="fit-card" style="padding:0;">
+	<mat-accordion>
+		<mat-expansion-panel id="panel"
+			(afterExpand)="open()"
+			(closed)="close()">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Network
+				</mat-panel-title>
+				<mat-panel-description>
+					DBN learnt
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngIf="network">
+				<app-network [data]="network" [id]=""></app-network>
+			</div>
+			<mat-card-actions align="end" style="margin: 0px -16px -16px 0px">
+				<button mat-button color="primary" (click)="downloadText()">Download Network as Text</button>
+			</mat-card-actions>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>
+
+<mat-card class="fit-card" style="padding:0;">
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Logs
+				</mat-panel-title>
+				<mat-panel-description>
+					See the program's output logs
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngIf="data.output.logs">
+				<div *ngFor="let log of data.output.logs">
+					{{ log }}
+				</div>
+			</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>
+<br>
+<!-- TODO: add option to choose from available datasets -->
+<!-- TODO: check attributes (?) -->
+<div style="clear: both;padding: 1px;">
+	<div class="sticky" style="padding: 1px;">
+		<mat-card class="fit-card" style="width: 300px;">
+			<mat-card-header>
+				<mat-icon mat-card-avatar color="accent">online_prediction</mat-icon>
+				<mat-card-title>Prediction</mat-card-title>
+				<mat-card-subtitle>Use network for prediction</mat-card-subtitle>
+			</mat-card-header>
+			<form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="makeRequest()">
+				<mat-card-content>
+					<br>
+					<mat-form-field>
+						<mat-label>Dynamic observations</mat-label>
+						<input matInput
+							ngClass="input-upload"
+							id="obs"
+							placeholder="Choose file"
+							type="text"
+							(focus)="removeFocus($event)"
+							(click)="add($event)"
+							formControlName="-obs"
+							[value]="value('-obs')" required>
+						<button *ngIf="files['-obs']"
+							mat-button
+							matSuffix
+							mat-icon-button
+							(click)="clear('-obs')">
+							<mat-icon>clear</mat-icon>
+						</button>
+						<input id="-obs" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+					</mat-form-field>
+					<br>
+					<mat-form-field>
+						<mat-label>Static observations</mat-label>
+						<input matInput
+							ngClass="input-upload"
+							id="obsStatic"
+							placeholder="Choose file"
+							type="text"
+							(focus)="removeFocus($event)"
+							(click)="add($event)"
+							[value]="value('-obsStatic')">
+						<button *ngIf="files['-obsStatic']"
+							mat-button
+							matSuffix
+							mat-icon-button
+							(click)="clear('-obsStatic')">
+							<mat-icon>clear</mat-icon>
+						</button>
+						<input id="-obsStatic" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+					</mat-form-field>
+					<br>
+					<mat-form-field>
+						<mat-label>Mode</mat-label>
+						<mat-select formControlName="request"
+							(selectionChange)="changeMode($event)"
+							required>
+							<mat-option value="isdtDBN">Attribute inference</mat-option>
+							<mat-option value="psdtDBN">Progression until timestamp</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<br>
+					<mat-form-field>
+						<mat-label>Estimation mode</mat-label>
+						<mat-select name="infFmt" formControlName="-infFmt" required>
+							<mat-option value="distrSampl">Random estimation using probability distribution</mat-option>
+							<mat-option value="mostProb">Most probable</mat-option>
+							<mat-option *ngIf="form.value.request=='isdtDBN'" value="distrib">Distribution</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<br>
+					<div *ngIf="form.value.request == 'psdtDBN'">
+						<mat-form-field>
+							<mat-label>Final timestamp</mat-label>
+							<input matInput
+								placeholder="Enter a positive number"
+								type="number"
+								min="1"
+								max="9999"
+								[required]="form.value.request == 'psdtDBN'"
+								formControlName="-t">
+						</mat-form-field>
+					</div>
+					<div *ngIf="form.value.request == 'isdtDBN'">
+						<mat-form-field>
+							<mat-label>Inference variables file</mat-label>
+							<input matInput
+								ngClass="input-upload"
+								id="inf"
+								placeholder="Choose file"
+								type="text"
+								(focus)="removeFocus($event)"
+								(click)="add($event)"
+								formControlName="-inf"
+								[required]="form.value.request == 'isdtDBN'"
+								[value]="value('-inf')">
+							<button *ngIf="files['-inf']"
+								mat-button
+								matSuffix
+								mat-icon-button
+								(click)="clear('-inf')">
+								<mat-icon>clear</mat-icon>
+							</button>
+							<input id="-inf" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+						</mat-form-field>
+					</div>
+					<br>
+					<mat-form-field>
+						<mat-label>Result name</mat-label>
+						<input matInput
+							placeholder="Enter name for your result"
+							type="text"
+							formControlName="requestName" required>
+					</mat-form-field>
+					<br>
+					<mat-checkbox
+						class="long-checkbox"
+						formControlName="notification"
+						attr.id="booleanOption">
+						Email results that take longer than 30 seconds
+					</mat-checkbox>
+				</mat-card-content>
+			</form>
+			<mat-card-actions align="end">
+				<button mat-raised-button color="primary" [disabled]="form.invalid" (click)="makeRequest()">Predict</button>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+	<!-- TODO: add missing (if needed) and discrete confirmation on observations file -->
+	<!-- TODO: fix padding -->
+	<app-result *ngIf="resultId" [resultId]="resultId"> </app-result>
+</div>

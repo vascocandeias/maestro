@@ -1,0 +1,31 @@
+<h3>Your other files</h3>
+<div class="center" *ngIf="!others" ><mat-spinner color="accent"></mat-spinner></div>
+<div layout="horizontal">
+	<div class="fit-card" *ngFor="let file of others">
+		<!-- <mat-card (click)="onCardClick()" matRipple class="clickable"> -->
+<!-- TODO: remove stroke when clicking -->
+		<mat-card >
+			{{file.datasetName}}
+<!-- TODO: align button to right when compressed -->
+<!-- TODO: ellipsis when compressed -->
+			<button
+				type="button"
+				aria-label="Download file"
+				mat-icon-button
+				style="margin-left: 5px;"
+				color="accent"
+				(click)="$event.stopPropagation(); download(file);">
+				<mat-icon aria-label="Download icon">save_alt</mat-icon>
+			</button>
+			<button
+				type="button"
+				aria-label="Delete file"
+				mat-icon-button
+				style="margin-left: 5px;"
+				color="accent"
+				(click)="$event.stopPropagation(); delete(file);">
+				<mat-icon aria-label="Delete icon">delete</mat-icon>
+			</button>
+		</mat-card>
+	</div>
+</div>

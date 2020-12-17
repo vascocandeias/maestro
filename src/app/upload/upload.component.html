@@ -1,0 +1,43 @@
+<!-- TODO: make card responsive -->
+<div class="upload-center">
+	<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+		<mat-card fxFlex.sm="80%" fxFlex.xs="80%">
+			<mat-card-content style="height: 100%">
+				<form style="height:100%;" [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="openDialog()">
+					<div [class]="error?'error':'dropdiv'"
+						(dragleave)="onDragLeave($event)"
+						(dragenter)="onDragOver($event)"
+						(dragover)="onDragOver($event)"
+						(drop)="onDropSuccess($event)"
+						id="drop">
+						<div class="body"
+							(drop)="onDropSuccess($event)">
+							<div class="icon">
+								<mat-icon color="primary" [inline]="true">cloud_upload</mat-icon>
+							</div>
+							<input type="file" accept=".csv" id="input-csv" (change)="handleFile($event, $event.target.files)" formControlName="file" />
+							<p><b>Drag and drop</b> a csv file here <br> or <a href="" (click)="add($event)">browse</a> to begin the analysis</p>
+						</div>
+					</div>
+				</form>
+			</mat-card-content>
+		</mat-card>
+		<mat-card fxFlex.sm="80%" fxFlex.xs="80%" style="white-space: nowrap; text-align: center;" *ngIf="!isEmpty(examples)">
+			<mat-card-content>
+				<h2>Example data sets</h2>
+				<mat-accordion>
+					<mat-expansion-panel class="mat-elevation-z0" *ngFor="let section of sections">
+						<mat-expansion-panel-header>
+						<mat-panel-title>
+							{{section | titlecase}}
+						</mat-panel-title>
+						</mat-expansion-panel-header>
+						    <mat-nav-list>
+								<a *ngFor="let example of examples[section]" mat-list-item href="javascript:void(null)" (click)="download(example)"> {{example}} </a>
+							</mat-nav-list>
+					</mat-expansion-panel>
+				</mat-accordion>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>

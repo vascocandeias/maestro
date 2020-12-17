@@ -1,0 +1,25 @@
+text{
+  font: 13px Roboto, "Helvetica Neue", sans-serif;
+  fill: black;
+  pointer-events: none;
+}
+
+div.tip {
+  position: absolute;
+  background-color: white;
+  border: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px;
+  font: 12px sans-serif;
+  pointer-events: none;         
+  z-index: 10 !important;
+}
+
+.graph{
+  text-align: left;
+}
+
+.graph rect:hover {
+  fill-opacity: 0.8;
+}

@@ -1,0 +1,89 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.full-card {
+  margin: 20px;
+  max-width: calc(100% - 40px);
+  // display: flex;
+}
+
+.fit-card {
+  @extend .full-card;
+  width: fit-content;
+  float: left;
+}
+
+@import '~@angular/material/theming';
+
+.fit-card .clickable {
+  cursor: pointer;
+  &:hover {
+    @include mat-elevation(8);
+  }
+}
+
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+.long-checkbox {
+  .mat-checkbox-inner-container {
+    margin-top: 3px !important;
+  };
+}
+
+// Hide number input arrows
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.center-card {
+  @extend .fit-card;
+  // background-color: red;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -ms-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+  padding: 30px !important;
+}
+
+.sticky {
+  position: -webkit-sticky !important; /* Safari */
+  position: sticky !important;
+  top: 84px !important;
+}
+
+.mat-form-field {
+  width: 100%
+}
+
+.input-upload {
+  cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

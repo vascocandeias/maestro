@@ -1,0 +1,22 @@
+<h3>Your data sets</h3>
+<div class="center" *ngIf="!datasets" ><mat-spinner color="accent"></mat-spinner></div>
+<div layout="horizontal">
+	<div class="fit-card" *ngFor="let dataset of datasets">
+		<!-- <mat-card (click)="onCardClick()" matRipple class="clickable"> -->
+<!-- TODO: remove stroke when clicking -->
+		<mat-card routerLink="/datasets/{{dataset.datasetId}}" matRipple class="clickable">
+			{{dataset.datasetName}}
+<!-- TODO: align button to right when compressed -->
+<!-- TODO: ellipsis when compressed -->
+			<button
+				type="button"
+				aria-label="Delete dataset"
+				mat-icon-button
+				style="margin-left: 5px;"
+				color="accent"
+				(click)="$event.stopPropagation(); delete(dataset);">
+				<mat-icon aria-label="Side nav toggle icon">delete</mat-icon>
+			</button>
+		</mat-card>
+	</div>
+</div>

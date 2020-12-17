@@ -1,0 +1,226 @@
+<mat-card class="fit-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="accent">model_training</mat-icon>
+        <mat-card-title>Modeling</mat-card-title>
+        <mat-card-subtitle>Learn a DBN model to use for inference</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="request()">
+        <mat-card-content>
+            <br>
+            <mat-form-field>
+                <mat-label>
+                    Scoring function
+                </mat-label>
+                <mat-select formControlName="-s" required>
+                    <mat-option value="mdl">MDL</mat-option>
+                    <mat-option value="ll">LL</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="-ns"
+                attr.id="booleanOption">
+                Learn stationary network
+            </mat-checkbox>
+            <br><br>
+            <mat-checkbox 
+                formControlName="-sp"
+                attr.id="booleanOption">
+                Force intra-slice connectivity to be a tree
+            </mat-checkbox>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Static features file</mat-label>
+                <input matInput
+                    [ngClass]="{'input-upload': form.value['-b']}"
+                    [disabled]="!form.value['-b']"
+                    id="is"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-is')">
+                <button *ngIf="files['-is']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-is')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input type="file" hidden accept=".csv" id="-is" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Mandatory inter-slice relations</mat-label>
+                <input matInput
+                    ngClass="input-upload"
+                    id="mA_dynPast"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-mA_dynPast')">
+                <button *ngIf="files['-mA_dynPast']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-mA_dynPast')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input id="-mA_dynPast" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Mandatory intra-slice relations</mat-label>
+                <input matInput
+                    ngClass="input-upload"
+                    id="mA_dynSame"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-mA_dynSame')">
+                <button *ngIf="files['-mA_dynSame']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-mA_dynSame')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input id="-mA_dynSame" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Mandatory static relations</mat-label>
+                <input matInput
+                    [ngClass]="{'input-upload': form.value['-b'] && files['-is']}"
+                    [disabled]="!form.value['-b'] || !files['-is']"
+                    id="mA_static"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-mA_static')">
+                <button *ngIf="files['-mA_static']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-mA_static')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input id="-mA_static" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Forbidden inter-slice relations</mat-label>
+                <input matInput
+                    ngClass="input-upload"
+                    id="mNotA_dynPast"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-mNotA_dynPast')">
+                <button *ngIf="files['-mNotA_dynPast']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-mNotA_dynPast')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input id="-mNotA_dynPast" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Forbidden intra-slice relations</mat-label>
+                <input matInput
+                    ngClass="input-upload"
+                    id="mNotA_dynSame"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-mNotA_dynSame')">
+                <button *ngIf="files['-mNotA_dynSame']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-mNotA_dynSame')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input id="-mNotA_dynSame" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Forbidden static relations</mat-label>
+                <input matInput
+                    [ngClass]="{'input-upload': form.value['-b'] && files['-is']}"
+                    [disabled]="!form.value['-b'] || !files['-is']"
+                    id="mNotA_static"
+                    placeholder="Choose file"
+                    type="text"
+                    (focus)="removeFocus($event)"
+                    (click)="add($event)"
+                    [value]="value('-mNotA_static')">
+                <button *ngIf="files['-mNotA_static']"
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="clear('-mNotA_static')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                <input id="-mNotA_static" type="file" hidden accept=".csv" (change)="handleFile($event)"/>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Markov lag</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-m" required>
+                <mat-hint>Maximum markov lag</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Number of static parents</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="0"
+                    max="9999"
+                    formControlName="-b">
+                <mat-hint>Maximum number of static parents</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Number of parents</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-p" required>
+                <mat-hint>Maximum number of parents from preceding time-slice(s)</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Result name</mat-label>
+                <input matInput
+                    placeholder="Enter name for your result"
+                    type="text"
+                    formControlName="requestName" required>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="notification"
+                attr.id="booleanOption">
+                Email results that take longer than 30 seconds
+            </mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-bottom: -16px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Learn Model</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

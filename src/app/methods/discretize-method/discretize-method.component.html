@@ -1,0 +1,48 @@
+<mat-card class="fit-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="accent">timeline</mat-icon>
+        <mat-card-title>Discretize</mat-card-title>
+        <mat-card-subtitle>Discretize continuous attributes</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="request()">
+        <mat-card-content>
+            <br>
+            <mat-form-field>
+                <mat-label>
+                    How to distribute values in each bin
+                </mat-label>
+                <mat-select formControlName="method" required>
+                    <mat-option value="eqw">Range of values is the same for every bin</mat-option>
+                    <mat-option value="eqf">Same amount of data points per bin</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Number of bins</mat-label>
+                <input matInput
+                    placeholder="Enter number from 1 to 9"
+                    type="number"
+                    min="1"
+                    max="9"
+                    formControlName="-n" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Result name</mat-label>
+                <input matInput
+                    placeholder="Enter name for your result"
+                    type="text"
+                    formControlName="requestName" required>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="notification"
+                attr.id="booleanOption">
+                Email results that take longer than 30 seconds
+            </mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-bottom: -16px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Discretize</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

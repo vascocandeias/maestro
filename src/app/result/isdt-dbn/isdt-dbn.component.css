@@ -1,0 +1,18 @@
+/*  Table CSS */
+table {
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table td, th {
+  font-weight:normal;
+  padding: 8px;
+}
+
+table th {
+  border-bottom: 1px solid black;
+}
+
+th:nth-child(1), td:nth-child(1) {  
+  border-right: 1px solid black;
+}

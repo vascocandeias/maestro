@@ -1,0 +1,88 @@
+<mat-card class="fit-card" style="padding:0;">
+	<mat-accordion>
+		<mat-expansion-panel id="panel"
+			(afterExpand)="open()"
+			(closed)="close()">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Network
+				</mat-panel-title>
+				<mat-panel-description>
+					DBN used to score outliers
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngIf="network">
+				<app-network [data]="network" [id]=""></app-network>
+			</div>
+			<mat-card-actions align="end" style="margin: 0px -16px -16px 0px">
+				<button mat-button color="primary" (click)="downloadText()">Download Network as Text</button>
+			</mat-card-actions>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>
+
+<div style="clear: both;padding: 1px;">
+	<div class="sticky">
+		<mat-card class="fit-card" style="width: 300px;">
+			<mat-card-header>
+				<mat-icon mat-card-avatar color="accent">bar_chart</mat-icon>
+				<mat-card-title>Controls</mat-card-title>
+			</mat-card-header>
+			<mat-card-content *ngIf="array[options[tabGroup.selectedIndex]]">
+				<h3>Threshold</h3>
+				<mat-slider
+					style="width:100%"
+					[max]="array[options[tabGroup.selectedIndex]].max"
+					[min]="array[options[tabGroup.selectedIndex]].min"
+					step="0.0000000000001"
+					thumbLabel="false"
+					[value] = "array[options[tabGroup.selectedIndex]].threshold"
+					(input)="array[options[tabGroup.selectedIndex]].threshold = $event.value">
+				</mat-slider>
+				<br>
+				<button mat-flat-button color="accent"
+					[disabled]="array[options[tabGroup.selectedIndex]].threshold == parsedData[options[tabGroup.selectedIndex]].thresholds.tukey"
+					style="margin:16px 16px; margin-left:0px"
+					(click)="array[options[tabGroup.selectedIndex]].threshold = parsedData[options[tabGroup.selectedIndex]].thresholds.tukey">
+					Tukey
+				</button>
+				<span class="spacer"></span>
+				<button mat-flat-button color="accent"
+					[disabled]="array[options[tabGroup.selectedIndex]].threshold == parsedData[options[tabGroup.selectedIndex]].thresholds.gmm"
+					style="margin:16px 0px"
+					(click)="array[options[tabGroup.selectedIndex]].threshold = parsedData[options[tabGroup.selectedIndex]].thresholds.gmm">
+					GMM
+				</button>
+				<h3>Bins</h3>
+				<mat-slider 
+					style="width:100%"
+					max="50"
+					min="1"
+					thumbLabel="true"
+					tickInterval="1"
+					[value] = "array[options[tabGroup.selectedIndex]].bins"
+					(input)="array[options[tabGroup.selectedIndex]].bins = $event.value">
+				</mat-slider>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<!-- TODO: fix padding -->
+	<!-- TODO: fix ExpressionChangedAfter error -->
+	<mat-card class="full-card" style="overflow:hidden">
+		<mat-tab-group #tabGroup>
+			<mat-tab *ngFor="let select of options" [label]="select | titlecase">
+				<ng-template matTabContent>
+					<app-histogram *ngIf="array[select]" [data]="parsedData[select]" [nbins]="array[select].bins" [threshold]="array[select].threshold"></app-histogram>
+				</ng-template>
+			</mat-tab>
+		</mat-tab-group>
+		<mat-card-actions align="end"  style="margin-right: -8px;">
+			<button mat-raised-button color="primary"
+				style="margin: 0px 8px;"
+				[disabled]="tabGroup.selectedIndex === undefined || tabGroup.selectedIndex != 0"
+				(click)="useDataset()">Use Data Set Without Outliers</button>
+			<button mat-button color="primary" (click)="downloadOutliers()">Download Outliers as CSV</button>
+			<button mat-button color="primary" (click)="downloadScores()">Download Scores as CSV</button>
+		</mat-card-actions>
+	</mat-card>
+</div>

@@ -1,0 +1,20 @@
+<div *ngIf="!data.stationary">
+	<p>
+		Non-stationary networks cannot be displayed.
+	</p>
+</div>
+
+<div *ngIf="data.stationary">
+	<mat-toolbar-row>
+		<p class="mat-card-subtitle">Hover over nodes to see parameters</p>
+		<span class="spacer"></span>
+		<button #downloadButton
+			id="downloadButton{{id}}"
+			matTooltip="Download as PNG"
+			matTooltipPosition="above"
+			mat-icon-button>
+			<mat-icon>save_alt</mat-icon>
+		</button>
+	</mat-toolbar-row>
+	<div style="overflow-x:auto;" id="network{{id}}"></div>
+</div>

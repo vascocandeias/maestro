@@ -1,0 +1,6 @@
+@import '/src/variables.scss';
+
+a {
+  text-decoration: none;
+  color: mat-color($app-accent);
+}

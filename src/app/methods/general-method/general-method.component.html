@@ -1,0 +1,80 @@
+<mat-card #general *ngIf="template" class="fit-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="accent">analytics</mat-icon>
+        <mat-card-title>{{ template.method }}</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="request()">
+        <mat-card-content>
+            <br>
+            <ng-container *ngFor="let option of template.options | keyvalue">
+                <mat-form-field>
+                    <mat-label>
+                        {{ option.value.description }}
+                    </mat-label>
+                    <mat-select [formControlName]="option.key">
+                        <mat-option 
+                            *ngFor="let value of option.value.values"
+                            [value]="value">
+                            {{ value }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+            </ng-container>
+            <ng-container *ngFor="let option of template.checkboxes | keyvalue">
+                <mat-checkbox 
+                    [formControlName]="option.key"
+                    attr.id="booleanOption">
+                    {{ option.value }}
+                </mat-checkbox>
+                <br><br>
+            </ng-container>
+            <div *ngFor="let file of template.files | keyvalue">
+                <mat-form-field>
+                    <mat-label>{{ file.value }}</mat-label>
+                    <input matInput
+                        ngClass="input-upload"
+                        [id]="'-' + file.key"
+                        placeholder="Choose file"
+                        type="text"
+                        (focus)="removeFocus($event)"
+                        (click)="add($event)"
+                        [value]="value(file.key)">
+                    <button *ngIf="files[file.key]"
+                        mat-button
+                        matSuffix
+                        mat-icon-button
+                        (click)="clear(file.key)">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                    <input type="file" hidden [id]="file.key" (change)="handleFile($event)"/>
+                </mat-form-field>
+            </div>
+            <ng-container *ngFor="let option of template.fields | keyvalue">
+                <mat-form-field>
+                    <mat-label>{{ option.value.description }}</mat-label>
+                    <input matInput
+                        [type]="typeof(option.value.value)"
+                        [formControlName]="option.key">
+                </mat-form-field>
+                <br>
+            </ng-container>
+            <mat-form-field>
+                <mat-label>Result name</mat-label>
+                <input matInput
+                    placeholder="Enter name for your result"
+                    type="text"
+                    formControlName="requestName" required>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="notification"
+                attr.id="booleanOption">
+                Email results that take longer than 30 seconds
+            </mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-bottom: -16px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Compute</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

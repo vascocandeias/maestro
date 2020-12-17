@@ -1,0 +1,24 @@
+<div *ngIf="file">
+	<!-- Display timeseries heatmap -->
+	<!-- TODO: fix padding (continuous_example_data) -->
+	<mat-card class="full-card" style="overflow: hidden !important;">
+		<mat-card-header>
+			<mat-card-title>{{ file.datasetName }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<app-heatmap [dataset]="dataset | async"></app-heatmap>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<button mat-button color="primary" (click)="download()">Download Data</button>
+		</mat-card-actions>
+	</mat-card>
+	<!-- Available methods -->
+	<div layout="horizontal" *ngIf="!file.final">
+		<app-discretize-method *ngIf="!isBoolean(file.discrete)" [datasetName]="file.datasetName" [discrete]="file.discrete" [datasetId]="file.datasetId"></app-discretize-method>
+		<app-impute-method *ngIf="file.missing" [datasetName]="file.datasetName" [datasetId]="file.datasetId" [discrete]="file.discrete"></app-impute-method>
+		<app-meteor-method *ngIf="!file.missing && isBoolean(file.discrete)" [datasetName]="file.datasetName" [datasetId]="file.datasetId"></app-meteor-method>
+		<app-learn-dbm-method *ngIf="!file.missing && isBoolean(file.discrete)" [datasetName]="file.datasetName" [datasetId]="file.datasetId"></app-learn-dbm-method>
+		<app-learn-sdtdbn-method *ngIf="!file.missing && isBoolean(file.discrete)" [datasetName]="file.datasetName" [datasetId]="file.datasetId"></app-learn-sdtdbn-method>
+		<app-general-method *ngFor="let method of general" [datasetName]="file.datasetName" [datasetId]="file.datasetId" [method]="method"></app-general-method>
+	</div>
+</div>

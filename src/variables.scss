@@ -1,0 +1,143 @@
+@import "~@angular/material/theming";
+
+$ist-blue: (
+    50 : #e0f3fb,
+    100 : #b3e2f6,
+    200 : #80cef0,
+    300 : #4dbae9,
+    400 : #26ace5,
+    500 : #009de0,
+    600 : #0095dc,
+    700 : #008bd8,
+    800 : #0081d3,
+    900 : #006fcb,
+    A100 : #f3f9ff,
+    A200 : #c0dfff,
+    A400 : #8dc5ff,
+    A700 : #74b8ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$ist-grey: (
+    50 : #e9ebec,
+    100 : #c8cccf,
+    200 : #a3aaaf,
+    300 : #7e888f,
+    400 : #626f77,
+    500 : #46555f,
+    600 : #3f4e57,
+    700 : #37444d,
+    800 : #2f3b43,
+    900 : #202a32,
+    A100 : #7ac5ff,
+    A200 : #47afff,
+    A400 : #1498ff,
+    A700 : #008dfa,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$dark-blue: (
+    50 : #e3effa,
+    100 : #bad6f2,
+    200 : #8cbbe9,
+    300 : #5e9fe0,
+    400 : #3c8bd9,
+    500 : #1976d2,
+    600 : #166ecd,
+    700 : #1263c7,
+    800 : #0e59c1,
+    900 : #0846b6,
+    A100 : #e0eaff,
+    A200 : #adc6ff,
+    A400 : #7aa3ff,
+    A700 : #6191ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$green: (
+    50 : #e3faf6,
+    100 : #b9f2e9,
+    200 : #8aeadb,
+    300 : #5be1cc,
+    400 : #38dac1,
+    500 : #15d4b6,
+    600 : #12cfaf,
+    700 : #0fc9a6,
+    800 : #0cc39e,
+    900 : #06b98e,
+    A100 : #e3fff7,
+    A200 : #b0ffea,
+    A400 : #7dffdc,
+    A700 : #64ffd5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat-palette($ist-blue);
+$app-accent:  mat-palette($dark-blue);
+
+// The warn palette is optional (defaults to red).
+$app-warn:    mat-palette($mat-red);

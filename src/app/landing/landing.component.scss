@@ -1,0 +1,219 @@
+@import '~@angular/material/theming';
+@import '/src/variables.scss';
+
+.header::after {
+  content: "";
+  background-image: url("~src/assets/images/landing-page.jpg");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.header {
+  /* Full height */
+  height: calc(100vh - 64px); 
+
+  color: black;
+  font-size: max(25px, min(36px, 7vw));
+
+  display: flex;
+
+  .text {
+    // background: red;
+    vertical-align: middle !important;
+  }
+  
+  .header-content {
+    max-width: 1100px;
+    padding: 15vh 15px;
+    margin: 0px auto;
+    position: relative;
+  }
+
+  .logos {
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+
+    mat-card-content {
+      text-align: center;
+    }
+    img {
+      vertical-align: middle;
+      margin: 10px;
+      max-width: 10vw;
+      min-width: 85px;
+      height: auto;
+    }
+  }
+
+  
+  h1, h3, p {
+    text-align: center;
+    margin: auto;
+  }
+}
+
+body, *:not(.mat-card-title):not(.mat-icon) {
+  line-height: 1.5; 
+}
+
+.mat-flat-button {
+  line-height: 36px !important;
+}
+
+carousel {
+  margin: 0px 60px;
+  width: calc(100% - 120px);
+  .mat-card:hover{
+    @include mat-elevation(8);
+    .mat-card-avatar {
+      color: mat-color($app-accent);
+    }
+    .mat-button {
+      color: mat-color($app-primary);
+    }
+  }
+}
+
+.light-section {
+  background: white;
+}
+
+.content {
+  max-width: 1100px;
+  padding: 80px 15px;
+  margin: 0px auto;
+}
+
+footer {
+  font-size: 14px;
+  color: white;
+  background-color: #46555f;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+footer .copyright {
+  background-color: #3f4c55;
+}
+
+footer .content {
+  padding: 20px 15px;
+  display: flex; 
+  justify-content: center;
+}
+
+.col{
+  margin-right: 15px;
+  width: 50%;
+}
+
+.col + .col {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+@media all and (max-width: 600px) {
+  footer .content {
+      flex-direction: column;
+  }    
+  .col {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+  .col + .col {
+    margin: 0;
+  }
+}
+
+.mail {
+  text-decoration: none;
+  color: #99D8F4;
+}
+
+.mat-linkedin {
+  background-color: #0077B5;
+  color: #fff;
+}
+
+.mat-github {
+  background-color: #24292E;
+  color: #fff;
+}
+
+.social {
+  // margin: 10px 0;
+  fa-icon {
+    margin-right: 8px;
+  }
+}
+
+.spaced {
+  display: table-cell;
+  width: 490px;
+}
+
+.spaced .mat-button-base {
+  margin: 0px 20px 20px 0;
+}
+
+@media all and (max-width: 600px) { /*style if screen size is <600px*/
+  .spaced .mat-button-base {
+    margin: 0px 10px 20px 10px;
+  }
+}
+
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  .mat-step {
+    line-height: 1em;
+  }
+
+  background-color: transparent;
+}
+
+.custom-link {
+  color: inherit
+}
+
+.custom-link:link {
+  text-decoration: none;
+}
+
+.custom-link:visited {
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  text-decoration: underline;
+}
+
+.custom-link:active {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+

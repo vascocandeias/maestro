@@ -1,0 +1,36 @@
+<mat-toolbar-row>
+	<span class="spacer"></span>
+	<div class="mat-paginator" *ngIf="headers">
+		<div class="mat-paginator-outer-container">
+			<div class="mat-paginator-container">
+				<div class="mat-paginator-page-size">
+					<div class="mat-paginator-page-size-label">Attribute:</div>
+					<mat-form-field
+						class="mat-paginator-page-size-select">
+						<mat-select
+							[value]="selectedOption"
+							(selectionChange)="onChangeAttribute($event.value)">
+							<mat-option *ngFor="let header of headers" [value]="header">
+								{{header}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
+	</div>
+	<mat-paginator
+		[length]="totalSubjects"
+		[pageSize]="step"
+		[pageSizeOptions]="ranges"
+		(page)="onChangePaginator($event)">
+	</mat-paginator>
+	<button
+		(click)="download()"
+		matTooltip="Download as PNG"
+		matTooltipPosition="above"
+		mat-icon-button>
+		<mat-icon>save_alt</mat-icon>
+	</button>
+</mat-toolbar-row>
+<div #heatmap id="heatmap" class="heatmap" (window:resize)="onResize()"></div>

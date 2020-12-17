@@ -1,0 +1,66 @@
+<mat-card class="fit-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="accent">remove_circle_outline</mat-icon>
+        <mat-card-title>Outlier Detection</mat-card-title>
+        <mat-card-subtitle>Detect values that do not fit a DBN model</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="request()">
+        <mat-card-content>
+            <br>
+            <mat-form-field>
+                <mat-label>
+                    Scoring function
+                </mat-label>
+                <mat-select formControlName="-s" required>
+                    <mat-option value="mdl" selected>MDL</mat-option>
+                    <mat-option value="ll">LL</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-checkbox
+                formControlName="-ns"
+                attr.id="booleanOption">
+                Learn stationary network
+            </mat-checkbox>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Markov lag</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-m" required>
+                <mat-hint>Maximum markov lag</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Number of parents</mat-label>
+                <input matInput
+                    placeholder="Enter a positive number"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    formControlName="-p" required>
+                <mat-hint>Maximum number of parents from preceding time-slice(s)</mat-hint>
+            </mat-form-field>
+            <br><br>
+            <mat-form-field>
+                <mat-label>Result name</mat-label>
+                <input matInput
+                    placeholder="Enter name for your result"
+                    type="text"
+                    formControlName="requestName" required>
+            </mat-form-field>
+            <br>
+            <mat-checkbox 
+                formControlName="notification"
+                attr.id="booleanOption">
+                Email results that take longer than 30 seconds
+            </mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-bottom: -16px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Detect Outliers</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

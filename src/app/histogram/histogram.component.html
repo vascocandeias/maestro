@@ -1,0 +1,8 @@
+<div #histogram id="histogram" (window:resize)="onResize()"></div>
+<mat-paginator
+    [length]="data.scores.data.length"
+    [pageSize]="step"
+    [pageSizeOptions]="ranges"
+    (page)="onChangePaginator($event)">
+</mat-paginator>
+<div #heatmap id="heatmap"></div>

@@ -1,0 +1,78 @@
+text{
+  font: 12px sans-serif;
+  fill: black;
+  pointer-events: none;
+}
+
+ellipse {
+  /*  rx: 10; */
+  fill: white;
+}
+
+.graph{
+  text-align: left;
+}
+
+.graph rect:hover {
+  fill-opacity: 0.8;
+}
+
+/* .a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+  cursor: hover;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.round {
+  border-radius: 50%;
+} */
+
+.tooltip {
+  display: none;
+  visibility: hidden;
+  width: fit-content;
+  background: white;
+  border-radius: 5px;
+  padding: 5px;
+  border: solid;
+  position: absolute;           
+  z-index: 10 !important;
+  border-width: 1px;
+  font: 13px sans-serif;
+  pointer-events: none;
+}
+
+/*  Table CSS */
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table td, th {
+  padding: 8px;
+}
+
+table thead {
+  border-bottom: 1px solid black;
+}
+
+.parents {
+  border-right: 1px solid black;
+}

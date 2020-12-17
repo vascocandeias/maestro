@@ -1,0 +1,16 @@
+{
+	"auth": {
+		"frontend5ca10a38": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
+	"storage": {
+		"s3thesis": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
