@@ -240,7 +240,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/maestro-old/"
+            "baseHref": "/maestro/"
           }
         }
       }
