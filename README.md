@@ -14,21 +14,40 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project requires Angular to be [installed](https://angular.io/guide/setup-local). When deploying in AWS, you will also need to install [AWS Amplify](https://docs.amplify.aws/start/getting-started/installation/q/integration/angular) and set up both [storage](https://docs.amplify.aws/lib/storage/getting-started/q/platform/js) and [authentication](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js).
 
+Finally, you should clone this repo or [download](https://api.github.com/repos/vascocandeias/maestro/zipball) and unzip the source code.
+
 ### Development server
 
-#### On-premises
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+When developing, you may run a development server to test the application, which will run on `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 #### Cloud
 
-### Deploy
+Run `ng serve`.
 
 #### On-premises
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng serve -c=local`.
+
+### Production deployment
+
+In both cases, the build artifacts will be stored in the `dist/` directory.
 
 #### Cloud
+
+Run `ng build`.
+
+You may also want to deploy to GitHub Pages. To do so:
+1. Add the `gh-pages` branch to your repo.
+2. Run `ng deploy --base-href=/<repositoryname>/`.
+3. In future deployments, you may use only `ng deploy`.
+
+#### On-premises
+
+You need to first have the [back-end]() already deployed. Afterwards:
+
+1. Run ```ng build -c=local-prod```. 
+2. Copy the files inside ```dist/``` to the back-end's ```gateway/maestro/``` directory.
+3. Clean the website's cache and refresh it.
 
 ### Further help
 
