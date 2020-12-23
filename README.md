@@ -8,22 +8,28 @@ For a more detailed explanation of this architecture, you may read the resulting
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-## Development server
+## Instructions
 
-### On-premises
+### Prerequisites
+
+This project requires Angular to be [installed](https://angular.io/guide/setup-local). When deploying in AWS, you will also need to install [AWS Amplify](https://docs.amplify.aws/start/getting-started/installation/q/integration/angular) and set up both [storage](https://docs.amplify.aws/lib/storage/getting-started/q/platform/js) and [authentication](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js).
+
+### Development server
+
+#### On-premises
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### Cloud
+#### Cloud
 
-## Deploy
+### Deploy
 
-### On-premises
+#### On-premises
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Cloud
+#### Cloud
 
-## Further help
+### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
