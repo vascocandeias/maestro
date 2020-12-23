@@ -43,12 +43,12 @@ You may also want to deploy to GitHub Pages. To do so:
 
 #### On-premises
 
-You need to first have the [back-end]() already deployed. Afterwards:
+You need to first have the [back-end](https://github.com/vascocandeias/maestro-backend) deployed. Afterwards:
 
 1. Run ```ng build -c=local-prod```. 
 2. Copy the files inside ```dist/``` to the back-end's ```gateway/maestro/``` directory.
-3. Clean the website's cache and refresh it.
+3. Clean the browser's cache and refresh it.
 
 ### Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To get more help on the Angular CLI use `ng help`, check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md) or visit the [documentation](https://angular.io/docs).
