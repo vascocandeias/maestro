@@ -136,16 +136,15 @@
     <section class="light-section">
         <div class="content">
             <h2>Ok... So is my data safe?</h2>
-            <!-- TODO: If you forget to delete something? After X days, files are deleted (incluir quando fizer) -->
             <!-- Explicar como é feita a encriptação e novas medidas -->
             <p>
-                <!-- TODO: change to more formal/direct: Yes! -->
-                Of course it is. The only thing we ask from you is a verified email, 
+                Yes! The only thing we ask from you is a verified email, 
                 so that we can not only guarantee your legitimacy but also let you know whenever you have results waiting for you.
             </p>
             <p>
                 As for the time series data and results, it is safely stored in Amazon S3 and DynamoDB with AES-256 encryption at rest, secured from prying eyes.
                 And everything you have in the servers is transparently shown in your dashboard, so that you can delete anything, even your entire account, at any time.
+                If you forget to do so, they will still be automatically wiped after three days.
             </p>
         </div>
     </section>
@@ -160,6 +159,45 @@
         </div>
     </section>
 
+    <section class="light-section">
+        <div class="content">
+            <h2>And how do I format my own files?</h2>
+            <p>
+                It's easy. The main multivariate time series CSV files should have a header line with all of the attributes and time points separated by two underscores.
+                These should be grouped by index and the order must be maintained.
+                The remaining lines start with an identifier of each subject, which is followed by its observations.
+                Missing values can be either empty, "?" or "NaN".
+            </p>
+            <p>
+                The following file is a very simple example of this format, and represents four subjects with two attributes (X and Y) evaluated across three time points. 
+            </p>
+            <div>
+            <!-- <div style="text-align: center"> -->
+                <pre style="display: inline-block; text-align: left; background-color: #FAFAFA; padding: 13px; margin: 0px; border-radius: 25px;">
+id,X__0,Y__0,X__1,Y__1,X__2,Y__2
+
+10,High,Short,Low,Long,Low,Short
+20,Low,Long,Low,Short,High,Short
+30,Low,Short,High,Long,High,Long
+40,Hgih,Long,High,Short,Low,Long</pre>
+            </div>
+            <p>
+                For information on other files specific to each package, view their respective instructional webpage.
+            </p>
+        </div>
+    </section>
+    
+    <section>
+        <div class="content">
+            <h2>I am still a bit confused... Can you walk me through some examples?</h2>
+            <p>
+                Sure! Just check this tutorial, where we exemplify most of the available tools. Enjoy!
+            </p>
+            <div style="text-align: center;">
+                <iframe style="margin: 13px 0px;" width="560" height="315" src="https://www.youtube.com/embed/VWfPkxaSWMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
     <footer>
         <div class="content">
             <div class="col">
@@ -195,7 +233,7 @@
         <div class="copyright">
             <div class="content">
                 <p ngPreserveWhitespaces>
-                    © 2020 by Vasco Candeias. Code licensed under an <a class="custom-link" target="_blank" href="/assets/LICENSE">MIT License</a>.
+                    © 2020 by Vasco Candeias. Code licensed under an <a class="custom-link" target="_blank" href="/maestro/assets/LICENSE.txt">MIT License</a>.
                 </p>
             </div>
         </div>

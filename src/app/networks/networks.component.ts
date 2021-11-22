@@ -24,6 +24,6 @@ export class NetworksComponent implements OnInit {
   }
   
   delete(network: any){
-    this.datasetService.deleteNetwork(network.datasetId).subscribe(result => {console.log(result); this.getNetworks()});
+    this.datasetService.deleteNetwork(network.requestId).subscribe(result => {console.log(result); this.getNetworks()});
   }
 }

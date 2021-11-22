@@ -38,7 +38,10 @@ export class HeatmapComponent implements OnChanges {
     this.totalSubjects = this.data.length / this.timeslices;
     this.selectedOption = this.headers[0];
     
-    this.ranges = [20, 50, 100, 500];
+    this.ranges = [20, 50, 100, 500].filter(d => d < this.totalSubjects);
+    this.ranges.push(this.totalSubjects);
+
+    // this.ranges = [20, 50, 100, 500];
     this.step = Math.min(...this.ranges);
     
     if(this.heatmapContainer) this.heatmapCreate();
@@ -143,9 +146,9 @@ export class HeatmapComponent implements OnChanges {
       this.dataset.discrete === true
       || (Array.isArray(this.dataset.discrete) && this.dataset.discrete.includes(this.selectedOption))
         ? d3.scaleOrdinal<string>(d3.schemeSpectral[9])
-          .domain(data.map(d => d.data))
+          .domain(this.data.map(d => d.data))
         : d3.scaleQuantize<string>()
-          .domain([d3.min(data.map(d => d.data)), d3.max(data.map(d => d.data))])
+          .domain([d3.min(this.data.map(d => d.data)), d3.max(data.map(d => d.data))])
           .range(d3.schemeSpectral[9])
 
     // create a tooltip

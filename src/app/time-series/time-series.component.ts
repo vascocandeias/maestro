@@ -20,7 +20,8 @@ export class TimeSeriesComponent implements OnChanges {
 
   empty = {
     "?": true,
-    "NaN": true
+    "NaN": true,
+    "\r": true
   };
 
   implemented = [

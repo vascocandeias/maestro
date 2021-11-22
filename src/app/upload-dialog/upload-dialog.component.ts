@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as Papa from 'papaparse';
-import { throwError } from 'rxjs';
 import { TimeSeriesModel } from '../data/data.model';
 import { DatasetService } from '../services/dataset.service';
 
@@ -21,7 +20,8 @@ export class UploadDialogComponent implements OnInit {
 
   empty = {
     "?": true,
-    "NaN": true
+    "NaN": true,
+    "\r": true
   };
 
   constructor(
@@ -103,7 +103,7 @@ export class UploadDialogComponent implements OnInit {
     var id = row.shift();
     let j = 0, i = 0;
 
-    if (row.length != dataset.numAttributes * dataset.numTimeSlices) {
+    if(row.length != dataset.numAttributes * dataset.numTimeSlices) {
       this.error = "Wrong number of inputs on subject " + id + ".";
       return;
     }
