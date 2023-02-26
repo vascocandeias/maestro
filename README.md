@@ -4,7 +4,7 @@ This repo contains the front-end source code of [MAESTRO (dynaMic bAyESian neTwo
 
 The publicly available website was deployed in AWS, and the relevant code is available [here](https://github.com/vascocandeias/maestro-cloud). You can also find the on-premises back-end code [here](https://github.com/vascocandeias/maestro-backend), which can be used to deploy the website in a managed network. The front-end of the local version [may be easily customised](#instructions) and deployed either in the cloud or on-premises.
 
-For a more detailed explanation of this architecture, you may read the resulting [article (available soon)](https://github.com/vascocandeias/maestro) or underlying [thesis (available soon)](https://github.com/vascocandeias/maestro).
+For a more detailed explanation of this architecture, you may read the resulting [article (available soon)](https://github.com/vascocandeias/maestro) or underlying [thesis](https://fenix.tecnico.ulisboa.pt/cursos/meec/dissertacao/1128253548922069).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
